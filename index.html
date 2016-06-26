@@ -220,17 +220,28 @@
 				border: 1px #ff7800 solid;
 				display: inline-block;
 			}
+			.artical-action-mid {
+				position: fixed;
+				z-index: 10002;
+				width: 100%;
+				height: 40%;
+				top: 30%;
+			}
 		</style>
 	</head>
 	<body>
 		<div id="root" class="container">
-			<div id="top-nav" class="top-nav">
+			<div class="m-artical-action">
+				<div id="action-mid" class="artical-action-mid"></div>
+			</div>
+			<!-- 顶部导航条 -->
+			<div id="top-nav" class="top-nav" " style="display:none;">
 				<div class="icon-back"></div>
 				<div class="nav-title">返回</div>
 			</div>
 			<div id="fiction_chapter_title"></div>
 			<div id="fiction_container" class="m-read-content">
-				<h4>第一章 武魂第一章 武魂第一章 武魂第一章 武魂</h4>
+				<h4>第一章 武魂</h4>
 				<p>
 					旭日东升，空气中依旧残留着一丝清晨的清冷之气，但是勤快的叶家村居民，已经早早起来开始工作了，即便是六七岁的稚童，也都在父母的催促下，开始了一天的晨练。
 				</p>
@@ -269,15 +280,15 @@
 				</ul>
 			</div>
 			<!-- 底部 -->
-			<div id="bottom-nav" class="bottom-nav">
+			<div id="bottom-nav" class="bottom-nav" style="display:none;">
 				<a href="javascript:void(0);" class="bottom-nav-menu"></a>
-				<a href="javascript:void(0);" class="bottom-nav-font"></a>
-				<a href="javascript:void(0);" class="bottom-nav-night"></a>
+				<a href="javascript:void(0);" class="bottom-nav-font" id="font-button"></a>
+				<a href="javascript:void(0);" class="bottom-nav-night" id="night-button"></a>
 				<a href="javascript:void(0);" class="bottom-nav-download"></a>
 			</div>
 			<!-- 字体面版 -->
-			<div class="nav-pannel-bk"></div>
-			<div class="nav-pannel" id="font-container">
+			<div class="nav-pannel-bk" id="font-container-bk" style="display:none;"></div>
+			<div class="nav-pannel" id="font-container" style="display:none;">
 				<div class="child-mod">
 					<span>字号</span>
 					<button id="large-font" class="font-size-button">大</button>
@@ -303,21 +314,31 @@
 
 		<script>
 			(function(){
-				var prefix = 'html5_reader_';
-				var Util = (function(){
-					var StorageGetter = function(prefix + key){
-						return localStorage.getItem(prefix + key);
-					}
-					var StorageSetter = function(prefix + key,val){
-						return localStorage.setItem(prefix + key,val)
-					}
-					return {
-						StorageGetter:StorageGetter,
-						StorageSetter:StorageSetter
-					}
-				})();
+				// var prefix = 'html5_reader_';
+				// var Util = (function(){
+				// 	var StorageGetter = function(prefix + key){
+				// 		return localStorage.getItem(prefix + key);
+				// 	}
+				// 	var StorageSetter = function(prefix + key,val){
+				// 		return localStorage.setItem(prefix + key,val)
+				// 	}
+				// 	return {
+				// 		StorageGetter:StorageGetter,
+				// 		StorageSetter:StorageSetter
+				// 	}
+				// })();
+				var Dom = {
+					top_nav: $('#top-nav'),
+					bottom_nav: $('#bottom-nav'),
+					font_container_bk: $('#font-container-bk'),
+					font_container: $('#font-container'),
+					font_button: $('#font-button')
+				}
+				var Win = $(window);
+				var Doc = $(document);
 				function main(){
 					// 整个项目的入口函数
+					EventHanlder();
 				}
 				function ReaderModel(){
 					//实现和阅读器相关数据交互方法
@@ -328,6 +349,26 @@
 				}
 				function EventHanlder(){
 					// 交互的事件绑定
+					$('#action-mid').click(function(){
+						Dom.top_nav.toggle();
+						Dom.bottom_nav.toggle();
+						Dom.font_container.hide();
+						Dom.font_container_bk.hide();
+					});
+					Win.scroll(function(){
+						Dom.top_nav.hide();
+						Dom.bottom_nav.hide();
+						Dom.font_container_bk.hide();
+						Dom.font_container.hide();
+					});
+					Dom.font_button.click(function(){
+						Dom.font_container_bk.toggle();
+						Dom.font_container.toggle();
+						//改字Aa颜色
+					});
+					$('night-button').click(function(){
+						//to do 触发背景切换事件
+					});
 				}
 				main();
 			})();
