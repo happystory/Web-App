@@ -139,6 +139,16 @@
 			.bottom-nav .bottom-nav-night:after {
 				content: '夜间';
 			}
+			.bottom-nav .bottom-nav-day:before{
+				margin-bottom: 4px;
+			    width: 19px;
+			    height: 18px;
+			    background: url(img/icon-day.png) no-repeat;
+			    background-size: 19px 18px;
+			}
+			.bottom-nav .bottom-nav-day:after{
+				content: '日间';
+			}
 			.bottom-nav .bottom-nav-download:before {
 				margin-bottom: 5px;
 				width: 22px;
@@ -285,6 +295,7 @@
 				<a href="javascript:void(0);" class="bottom-nav-menu"></a>
 				<a href="javascript:void(0);" class="bottom-nav-font" id="font-button"></a>
 				<a href="javascript:void(0);" class="bottom-nav-night" id="night-button"></a>
+				<a href="javascript:void(0);" class="bottom-nav-day" id="day-button" style="display:none;"></a>
 				<a href="javascript:void(0);" class="bottom-nav-download"></a>
 			</div>
 			<!-- 字体面版 -->
@@ -312,7 +323,7 @@
 			window.jQuery = $;
 		</script>
 		<script src="js/jquery.jsonp.js"></script>
-
+		<script src="js/jquery.base64.js"></script>
 		<script>
 			(function(){
 				var Util = (function(){
@@ -323,9 +334,22 @@
 					var StorageSetter = function(key,val){
 						return localStorage.setItem(prefix + key,val);
 					}
+					var getJSONP = function(url,callback){
+						return $.jsonp({
+							url: url,
+							cache: true,
+							callback: 'duokan_fiction_chapter',
+							success: function(result){
+								var data = $.base64.decode(result);
+								var json = decodeURIComponent(escape(data));
+								callback(data);
+							}
+						})
+					}
 					return {
 						StorageGetter:StorageGetter,
-						StorageSetter:StorageSetter
+						StorageSetter:StorageSetter,
+						getJSONP: getJSONP
 					}
 				})();
 				var Dom = {
@@ -364,19 +388,35 @@
 				}
 				function ReaderModel(){
 					//实现和阅读器相关数据交互方法
+					var getFictionInfo = function(){
+						$.get('data/chapter.json',function(){
+							// 获得章节信息之后的回调
+						},'json');
+					}
+					var getCurChapterContent = function(){
+						$.get('data/data'+chapter_id+'.json',function(data){
+							if(data.result == 0) {
+								var url = data.jsonp;
+								Util.getJSONP(url, function(data){
+									callback && callback(data);
+								});
+							}
+						},'json')
+					}
 				}
 
 				function ReaderBaseFrame(){
 					// 渲染基本的UI结构
 				}
 				function EventHanlder(){
-					// 交互的事件绑定
+					// 实现唤醒上下边栏功能
 					$('#action-mid').click(function(){
 						Dom.top_nav.toggle();
 						Dom.bottom_nav.toggle();
 						Dom.font_container.hide();
 						Dom.font_container_bk.hide();
 					});
+					// 实现唤醒字体面版功能
 					Win.scroll(function(){
 						Dom.top_nav.hide();
 						Dom.bottom_nav.hide();
@@ -386,11 +426,8 @@
 					Dom.font_button.click(function(){
 						Dom.font_container_bk.toggle();
 						Dom.font_container.toggle();
-						//改字Aa颜色
 					});
-					$('night-button').click(function(){
-						//to do 触发背景切换事件
-					});
+					// 实现设置字号功能
 					$('#large-font').click(function(){
 						if(initFont > 20) {
 							return;
@@ -407,6 +444,7 @@
 						Fic.css('font-size',initFont);
 						Util.StorageSetter('font-size',initFont);
 					});
+					//实现设置背景功能
 					$('.bk-container').click(function(){
 						var txt = $('<div></div>');
 						txt.addClass('bk-container-current');
@@ -415,7 +453,18 @@
 						$('body').css('background-color',bg);
 						Util.StorageSetter('background-color',bg);
 						Util.StorageSetter('index',$(this).index());
-					})
+					});
+					// 实现夜间模式功能
+					$('#night-button').click(function(){
+						$('body').css('background-color','#0f1410');
+						$(this).hide();
+						$('#day-button').show();
+					});
+					$('#day-button').click(function(){
+						$('body').css('background-color',bg);
+						$(this).hide();
+						$('#night-button').show();
+					});
 				}
 				main();
 			})();
