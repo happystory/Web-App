@@ -156,7 +156,7 @@
 				width: 100%;
 				background: #000;
 				opacity: 0.9;
-				z-index: 10000;
+				z-index: 10003;
 			}
 			.nav-pannel {
 				position: fixed;
@@ -165,7 +165,7 @@
 				width: 100%;
 				background: none;
 				color: #fff;
-				z-index: 10001;
+				z-index: 10004;
 			}
 			.nav-pannel .child-mod {
 				padding: 5px 10px;
@@ -182,6 +182,7 @@
 				color: #fff;
 				border-radius: 16px;
 				padding: 5px 40px;
+				outline: none;
 			}
 			.child-mod button:nth-child(2) {
 				margin-right: 10px;
@@ -314,19 +315,19 @@
 
 		<script>
 			(function(){
-				// var prefix = 'html5_reader_';
-				// var Util = (function(){
-				// 	var StorageGetter = function(prefix + key){
-				// 		return localStorage.getItem(prefix + key);
-				// 	}
-				// 	var StorageSetter = function(prefix + key,val){
-				// 		return localStorage.setItem(prefix + key,val)
-				// 	}
-				// 	return {
-				// 		StorageGetter:StorageGetter,
-				// 		StorageSetter:StorageSetter
-				// 	}
-				// })();
+				var Util = (function(){
+					var prefix = 'html5_reader_';
+					var StorageGetter = function(key){
+						return localStorage.getItem(prefix + key);
+					}
+					var StorageSetter = function(key,val){
+						return localStorage.setItem(prefix + key,val);
+					}
+					return {
+						StorageGetter:StorageGetter,
+						StorageSetter:StorageSetter
+					}
+				})();
 				var Dom = {
 					top_nav: $('#top-nav'),
 					bottom_nav: $('#bottom-nav'),
@@ -336,6 +337,13 @@
 				}
 				var Win = $(window);
 				var Doc = $(document);
+				var Fic = $('#fiction_container');
+				var initFont = Util.StorageGetter('font-size');
+				initFont = parseInt(initFont);
+				if(!initFont) {
+					initFont = 14;
+				}
+				Fic.css('font-size',initFont);
 				function main(){
 					// 整个项目的入口函数
 					EventHanlder();
@@ -368,6 +376,22 @@
 					});
 					$('night-button').click(function(){
 						//to do 触发背景切换事件
+					});
+					$('#large-font').click(function(){
+						if(initFont > 20) {
+							return;
+						}
+						initFont += 1;
+						Fic.css('font-size',initFont);
+						Util.StorageSetter('font-size',initFont);
+					});
+					$('#samll-font').click(function(){
+						if(initFont <= 12) {
+							return;
+						}
+						initFont -= 1;
+						Fic.css('font-size',initFont);
+						Util.StorageSetter('font-size',initFont);
 					});
 				}
 				main();
