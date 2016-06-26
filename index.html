@@ -197,19 +197,19 @@
 				margin-right: 5px;
 			}
 			.bk-container-bg1{
-				background: #fff;
+				background-color: #e9dfc7;
 			}
 			.bk-container-bg2{
-				background: #e9dfc7;
+				background-color: #fff;
 			}
 			.bk-container-bg3{
-				background: #a4a4a4;
+				background-color: #a4a4a4;
 			}
 			.bk-container-bg4{
-				background: #cdefce;
+				background-color: #cdefce;
 			}
 			.bk-container-bg5{
-				background: #283548;
+				background-color: #283548;
 			}
 			.bk-container .bk-container-current {
 				position: absolute;
@@ -338,12 +338,26 @@
 				var Win = $(window);
 				var Doc = $(document);
 				var Fic = $('#fiction_container');
+				// 初始化字体大小
 				var initFont = Util.StorageGetter('font-size');
 				initFont = parseInt(initFont);
 				if(!initFont) {
 					initFont = 14;
 				}
 				Fic.css('font-size',initFont);
+				// 初始化背景颜色
+				var bg = Util.StorageGetter('background-color');
+				if(!bg) {
+					bg = '#e9dfc7';
+				}
+				$('body').css('background-color',bg);
+				// 背景颜色外圈
+				var index = Util.StorageGetter('index');
+				if(index!==null) {
+					var txt = $('<div></div>');
+					txt.addClass('bk-container-current');
+					$('.bk-container').eq(index-1).append(txt).siblings().filter('.bk-container').empty();
+				}
 				function main(){
 					// 整个项目的入口函数
 					EventHanlder();
@@ -393,6 +407,15 @@
 						Fic.css('font-size',initFont);
 						Util.StorageSetter('font-size',initFont);
 					});
+					$('.bk-container').click(function(){
+						var txt = $('<div></div>');
+						txt.addClass('bk-container-current');
+						$(this).append(txt).siblings().filter('.bk-container').empty();
+						bg = $(this).css('background-color');
+						$('body').css('background-color',bg);
+						Util.StorageSetter('background-color',bg);
+						Util.StorageSetter('index',$(this).index());
+					})
 				}
 				main();
 			})();
