@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- 禁止了把数字转化为拨号链接 -->
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="css/reset.css">
     <style type="text/css">
@@ -352,6 +353,7 @@
     <script src="js/jquery.base64.js"></script>
     <script>
     (function() {
+    	'use strict';
         var Util = (function() {
             var prefix = 'html5_reader_';
             var StorageGetter = function(key) {
@@ -366,8 +368,9 @@
                     cache: true,
                     callback: 'duokan_fiction_chapter',
                     success: function(result) {
-                        // var data = $.base64.decode(result);
-                        var data = window.atob(result);
+                        var data = $.base64.decode(result);
+                        // 可以不使用jquery插件，写成var data = window.atob(result);
+                        // 参考https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/btoa
                         var json = decodeURIComponent(escape(data));
                         callback(json);
                     }
@@ -431,15 +434,26 @@
             var Chapter_id;
             var ChapterTotal;
             var init = function(UIcallback) {
-                getFictionInfo(function() {
-                    getCurChapterContent(Chapter_id, function(data) {
-                        UIcallback && UIcallback(data);
-                    });
-                });
+            	// 普通回调
+                // getFictionInfo(function() {
+                //     getCurChapterContent(Chapter_id, function(data) {
+                //         UIcallback && UIcallback(data);
+                //     });
+                // });
+                
+                // Promise
+                getFictionInfoPromise()
+                	.then(function(d) {
+                		return getCurChapterContentPromise();
+                	})
+                	.then(function(data) {
+                		UIcallback && UIcallback(data);
+                	});
             };
+
             var getFictionInfo = function(callback) {
                 $.get('data/chapter.json', function(data) {
-                    // 获得章节信息之后的回调
+                	// 获得章节信息之后的回调
                     Chapter_id = Util.StorageGetter('last_chapter_id');
                     if (Chapter_id == null) {
                         Chapter_id = data.chapters[1].chapter_id;
@@ -448,6 +462,25 @@
                     callback && callback();
                 }, 'json');
             };
+
+            var getFictionInfoPromise = function() {
+            	return new Promise(function(resolve, reject) {
+	            	$.get('data/chapter.json', function(data) {
+	            		// 获得章节信息之后的回调
+	            	    if(data.result === 0) {
+	            	    	Chapter_id = Util.StorageGetter('last_chapter_id');
+	            	    	if (Chapter_id == null) {
+	            	    	    Chapter_id = data.chapters[1].chapter_id;
+	            	    	}
+	            	    	ChapterTotal = data.chapters.length;
+	            	    	resolve(Chapter_id);
+	            	    } else {
+	            	    	reject({msg: 'fail'});
+	            	    }
+	            	}, 'json');
+	            });
+            }
+
             var getCurChapterContent = function(chapter_id, callback) {
                 $.get('data/data' + chapter_id + '.json', function(data) {
                     if (data.result === 0) {
@@ -458,6 +491,22 @@
                     }
                 }, 'json');
             };
+
+            var getCurChapterContentPromise = function() {
+            	return new Promise(function(resolve, reject) {
+	            	$.get('data/data' + Chapter_id + '.json', function(data) {
+	            	    if (data.result === 0) {
+	            	        var url = data.jsonp;
+	            	        Util.getJSONP(url, function(data) {
+	            	            resolve(data);
+	            	        });
+	            	    } else {
+	            	    	reject({msg: 'fail'});
+	            	    }
+	            	}, 'json');
+	            });
+            }
+
             var prevChapter = function(UIcallback) {
                 Chapter_id = parseInt(Chapter_id, 10);
                 if (Chapter_id === 1) {
