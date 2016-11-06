@@ -62,6 +62,8 @@
 			.m-button-bar .u-tab li:nth-child(2){
 				border-right: none;
 			}
+
+			/*顶部导航条*/
 			.top-nav {
 				position: fixed;
 				top: 0px;
@@ -119,6 +121,8 @@
 			.bottom-nav .bottom-nav-menu:after {
 				content: '目录';
 			}
+
+			/*字体*/
 			.bottom-nav .bottom-nav-font:before {
 				margin-bottom: 9px;
 				width: 20px;
@@ -159,6 +163,8 @@
 			.bottom-nav .bottom-nav-download:after{
 				content: '下载';
 			}
+
+			/*字体面版*/
 			.nav-pannel-bk {
 				position: fixed;
 				bottom: 70px;
@@ -242,47 +248,48 @@
 	</head>
 	<body>
 		<div id="root" class="container">
+			<!-- 中央唤醒区 -->
 			<div class="m-artical-action">
 				<div id="action-mid" class="artical-action-mid"></div>
 			</div>
 			<!-- 顶部导航条 -->
 			<div id="top-nav" class="top-nav" " style="display:none;">
 				<div class="icon-back"></div>
-				<div class="nav-title">返回</div>
+				<div class="nav-title">返回书架</div>
 			</div>
 			<div id="fiction_chapter_title"></div>
 			<div id="fiction_container" class="m-read-content">
-				<h4>第一章 武魂</h4>
-				<p>
-					旭日东升，空气中依旧残留着一丝清晨的清冷之气，但是勤快的叶家村居民，已经早早起来开始工作了，即便是六七岁的稚童，也都在父母的催促下，开始了一天的晨练。
-				</p>
-				<p>
-					在村东的那片空地上，一群大小不一的孩子，正在三个兽皮粗布壮汉的吆喝下，排列成了十个整整齐齐的队伍，足足有一百多人。
-				</p>
-				<p>
-					早晨温暖的阳光洒落在这些孩子的脸上，洋溢的是一张张稚嫩的面孔，以及蓬勃的朝气。
-				</p>
-				<p>
-					“想要成为一名强大的武者，必须要从小刻苦锻炼，懒惰的人，是不可能成为武者的，就算侥幸成为武者，也不会有太大的成就。”
-				</p>
-				<p>
-					一个中年男子从三个兽皮粗布壮汉的身边走过，来到这些孩子面前，他背负着双手，犀利的目光扫过这群孩子，冷然说道。
-				</p>
-				<p>
-					这是叶家村猎兽队的队长，也是村里孩子们的启蒙导师——叶锋。
-				</p>
-				<p>
-					“你们都是普普通通的农村人，不可能像城里富家子弟那样从小就有无数珍贵的灵丹药材温养身体。想要成为一名强大的武者，想要出人头地，刻苦训练，锻炼身体，是你们唯一的方法，听到没有！”
-				</p>
-				<p>
-					叶锋冰冷的目光扫过这群孩子，吓得孩子们身体一颤，连忙一起响亮地吼道：“听到了！”
-				</p>
-				<p>
-					“很好，开始训练！”叶锋满意地点了点头，将剩下的训练工作，交给了旁边那三个兽皮粗布壮汉，作为叶家村猎兽队的队长，他每天都要带着村里的猎手进山去猎杀凶兽，储存过冬的食物。
-				</p>
-				<p>
-					“狠狠操练这帮小兔崽子们，别让他们偷懒！”叶锋对着三个兽皮粗布壮汉说道。
-				</p>
+				<!--<h4>第一章 武魂</h4>-->
+				<!--<p>-->
+					<!--旭日东升，空气中依旧残留着一丝清晨的清冷之气，但是勤快的叶家村居民，已经早早起来开始工作了，即便是六七岁的稚童，也都在父母的催促下，开始了一天的晨练。-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--在村东的那片空地上，一群大小不一的孩子，正在三个兽皮粗布壮汉的吆喝下，排列成了十个整整齐齐的队伍，足足有一百多人。-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--早晨温暖的阳光洒落在这些孩子的脸上，洋溢的是一张张稚嫩的面孔，以及蓬勃的朝气。-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--“想要成为一名强大的武者，必须要从小刻苦锻炼，懒惰的人，是不可能成为武者的，就算侥幸成为武者，也不会有太大的成就。”-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--一个中年男子从三个兽皮粗布壮汉的身边走过，来到这些孩子面前，他背负着双手，犀利的目光扫过这群孩子，冷然说道。-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--这是叶家村猎兽队的队长，也是村里孩子们的启蒙导师——叶锋。-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--“你们都是普普通通的农村人，不可能像城里富家子弟那样从小就有无数珍贵的灵丹药材温养身体。想要成为一名强大的武者，想要出人头地，刻苦训练，锻炼身体，是你们唯一的方法，听到没有！”-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--叶锋冰冷的目光扫过这群孩子，吓得孩子们身体一颤，连忙一起响亮地吼道：“听到了！”-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--“很好，开始训练！”叶锋满意地点了点头，将剩下的训练工作，交给了旁边那三个兽皮粗布壮汉，作为叶家村猎兽队的队长，他每天都要带着村里的猎手进山去猎杀凶兽，储存过冬的食物。-->
+				<!--</p>-->
+				<!--<p>-->
+					<!--“狠狠操练这帮小兔崽子们，别让他们偷懒！”叶锋对着三个兽皮粗布壮汉说道。-->
+				<!--</p>-->
 			</div>
 			<div class="m-button-bar">
 				<ul class="u-tab">
@@ -298,8 +305,9 @@
 				<a href="javascript:void(0);" class="bottom-nav-day" id="day-button" style="display:none;"></a>
 				<a href="javascript:void(0);" class="bottom-nav-download"></a>
 			</div>
-			<!-- 字体面版 -->
+			<!-- 字体面版背景 -->
 			<div class="nav-pannel-bk" id="font-container-bk" style="display:none;"></div>
+			<!-- 字体面版 -->
 			<div class="nav-pannel" id="font-container" style="display:none;">
 				<div class="child-mod">
 					<span>字号</span>
@@ -330,10 +338,10 @@
 					var prefix = 'html5_reader_';
 					var StorageGetter = function(key){
 						return localStorage.getItem(prefix + key);
-					}
+					};
 					var StorageSetter = function(key,val){
 						return localStorage.setItem(prefix + key,val);
-					}
+					};
 					var getJSONP = function(url,callback){
 						return $.jsonp({
 							url: url,
@@ -342,33 +350,36 @@
 							success: function(result){
 								var data = $.base64.decode(result);
 								var json = decodeURIComponent(escape(data));
-								callback(data);
+								callback(json);
 							}
 						})
-					}
+					};
 					return {
 						StorageGetter:StorageGetter,
 						StorageSetter:StorageSetter,
 						getJSONP: getJSONP
 					}
 				})();
+
 				var Dom = {
 					top_nav: $('#top-nav'),
 					bottom_nav: $('#bottom-nav'),
 					font_container_bk: $('#font-container-bk'),
 					font_container: $('#font-container'),
 					font_button: $('#font-button')
-				}
+				};
+                var readerModel;
+                var readerUI;
 				var Win = $(window);
 				var Doc = $(document);
-				var Fic = $('#fiction_container');
+				var RootContainer = $('#fiction_container');
 				// 初始化字体大小
 				var initFont = Util.StorageGetter('font-size');
 				initFont = parseInt(initFont);
 				if(!initFont) {
 					initFont = 14;
 				}
-				Fic.css('font-size',initFont);
+                RootContainer.css('font-size',initFont);
 				// 初始化背景颜色
 				var bg = Util.StorageGetter('background-color');
 				if(!bg) {
@@ -382,18 +393,41 @@
 					txt.addClass('bk-container-current');
 					$('.bk-container').eq(index-1).append(txt).siblings().filter('.bk-container').empty();
 				}
+
 				function main(){
 					// 整个项目的入口函数
+					readerModel = ReaderModel();
+                    readerUI = ReaderBaseFrame(RootContainer);
+					readerModel.init(function(data){
+                        readerUI(data);
+                    });
 					EventHanlder();
 				}
+
 				function ReaderModel(){
 					//实现和阅读器相关数据交互方法
-					var getFictionInfo = function(){
-						$.get('data/chapter.json',function(){
+					var Chapter_id;
+                    var ChapterTotal;
+					var init = function(UIcallback){
+						getFictionInfo(function(){
+							getCurChapterContent(Chapter_id,function(data){
+								// TODO
+                                UIcallback && UIcallback(data);
+							})
+						})
+					};
+					var getFictionInfo = function(callback){
+						$.get('data/chapter.json',function(data){
 							// 获得章节信息之后的回调
+                            Chapter_id = Util.StorageGetter('last_chapter_id');
+                            if(Chapter_id == null) {
+                                Chapter_id = data.chapters[1].chapter_id;
+                            }
+                            ChapterTotal = data.chapters.length;
+							callback && callback();
 						},'json');
-					}
-					var getCurChapterContent = function(){
+					};
+					var getCurChapterContent = function(chapter_id, callback){
 						$.get('data/data'+chapter_id+'.json',function(data){
 							if(data.result == 0) {
 								var url = data.jsonp;
@@ -402,12 +436,50 @@
 								});
 							}
 						},'json')
+					};
+                    var prevChapter = function(UIcallback){
+                        Win.scrollTop(0);
+                        Chapter_id = parseInt(Chapter_id, 10);
+                        if(Chapter_id == 1) {
+                            return;
+                        }
+                        Chapter_id -= 1;
+                        getCurChapterContent(Chapter_id, UIcallback);
+                        Util.StorageSetter('last_chapter_id', Chapter_id);
+                    };
+                    var nextChapter = function(UIcallback){
+                        Win.scrollTop(0);
+                        Chapter_id = parseInt(Chapter_id, 10);
+                        //todo ChapterTotal
+                        if(Chapter_id == 4) {
+                            return;
+                        }
+                        Chapter_id += 1;
+                        getCurChapterContent(Chapter_id, UIcallback);
+                        Util.StorageSetter('last_chapter_id', Chapter_id);
+                    };
+					return {
+						init: init,
+                        prevChapter: prevChapter,
+                        nextChapter: nextChapter
 					}
 				}
 
-				function ReaderBaseFrame(){
+				function ReaderBaseFrame(container){
 					// 渲染基本的UI结构
+                    function parseChapterData(jsonData){
+                        var jsonObj = JSON.parse(jsonData);
+                        var html = '<h4>' + jsonObj.t + '</h4>';
+                        for (var i = 0; i < jsonObj.p.length; i ++) {
+                            html += '<p>' + jsonObj.p[i] + '</p>';
+                        }
+                        return html;
+                    }
+                    return function(data){
+                        container.html(parseChapterData(data));
+                    }
 				}
+				
 				function EventHanlder(){
 					// 实现唤醒上下边栏功能
 					$('#action-mid').click(function(){
@@ -416,14 +488,16 @@
 						Dom.font_container.hide();
 						Dom.font_container_bk.hide();
 					});
-					// 实现唤醒字体面版功能
+					// 滚动隐藏
 					Win.scroll(function(){
 						Dom.top_nav.hide();
 						Dom.bottom_nav.hide();
 						Dom.font_container_bk.hide();
 						Dom.font_container.hide();
 					});
+					// 实现唤醒字体面版功能
 					Dom.font_button.click(function(){
+
 						Dom.font_container_bk.toggle();
 						Dom.font_container.toggle();
 					});
@@ -433,7 +507,7 @@
 							return;
 						}
 						initFont += 1;
-						Fic.css('font-size',initFont);
+                        RootContainer.css('font-size',initFont);
 						Util.StorageSetter('font-size',initFont);
 					});
 					$('#samll-font').click(function(){
@@ -441,7 +515,7 @@
 							return;
 						}
 						initFont -= 1;
-						Fic.css('font-size',initFont);
+                        RootContainer.css('font-size',initFont);
 						Util.StorageSetter('font-size',initFont);
 					});
 					//实现设置背景功能
@@ -453,6 +527,8 @@
 						$('body').css('background-color',bg);
 						Util.StorageSetter('background-color',bg);
 						Util.StorageSetter('index',$(this).index());
+						$('#day-button').hide();
+						$('#night-button').show();
 					});
 					// 实现夜间模式功能
 					$('#night-button').click(function(){
@@ -465,6 +541,17 @@
 						$(this).hide();
 						$('#night-button').show();
 					});
+
+                    $('#prev_button').click(function(){
+                        readerModel.prevChapter(function(data){
+                            readerUI(data);
+                        });
+                    });
+                    $('#next_button').click(function(){
+                        readerModel.nextChapter(function(data){
+                            readerUI(data);
+                        });
+                    });
 				}
 				main();
 			})();
